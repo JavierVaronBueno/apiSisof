@@ -18,11 +18,29 @@ class liquidacionController extends Controller
     {
         
         $vehiculos = sisof_Vehiculo::where('placa', $placa)->first();
-        dd($vehiculos->vehiculoPropietario());
+        $vehiculosPropietarios = sisof_VehiculoPropietario::where('vehiculo', $vehiculos->id)->first();
+        $propietarios = sisof_Propietario::where('id', $vehiculosPropietarios->propietario)->first();
+        //dd($propietarios);
         
-        $liquidacion=0.0;
-        return $liquidacion;
-        
+        $liquidacion=$vehiculos->precio*1.5;
+        $data = [
+            'success'=>true,
+            'Liquidacion' => array(
+                array(
+                    'id_vehiculo'=>$vehiculos->id,
+                    'placa'=>$vehiculos->placa,
+                    'marca'=>$vehiculos->marca,
+                    'linea'=>$vehiculos->linea,
+                    'precio'=>$vehiculos->precio,
+                    'liquidacion'=>$liquidacion,
+                    'id_propietario'=>$propietarios->id,
+                    'cedula'=>$propietarios->cedula,
+                    'nombres'=>$propietarios->nombres,
+                    'apellidos'=>$propietarios->apellidos
+                    )  
+            )
+        ];
+        return response()->json($data, 200, []);
     }
 
     /**
