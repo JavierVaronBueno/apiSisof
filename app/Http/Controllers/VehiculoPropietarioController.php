@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\vehiculoPropietarioCreateRequest;
+use App\Http\Requests\vehiculoPropietarioEditeRequest;
 use Illuminate\Http\Request;
 use App\Models\sisof_VehiculoPropietario;
 
@@ -34,7 +36,7 @@ class VehiculoPropietarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(vehiculoPropietarioCreateRequest $request)
     {
         $vehiculoPropietario = new sisof_VehiculoPropietario();
         $vehiculoPropietario->propietario = $request->propietario;
@@ -73,7 +75,7 @@ class VehiculoPropietarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(vehiculoPropietarioEditeRequest $request)
     {
         $vehiculoPropietario = sisof_VehiculoPropietario::findOrFail($request->id);
         $vehiculoPropietario->propietario = $request->propietario;

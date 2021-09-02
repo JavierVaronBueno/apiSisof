@@ -13,8 +13,7 @@ class sisof_Vehiculo extends Model
         'placa',
         'marca',
         'linea',
-        'precio', 
-        'propietario'
+        'precio'
     ];
 
     public function vehiculoPropietario(){

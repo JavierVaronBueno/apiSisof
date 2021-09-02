@@ -32,3 +32,6 @@ Route::get('/vehiculosPropietarios', 'App\Http\Controllers\VehiculoPropietarioCo
 Route::post('/vehiculosPropietarios', 'App\Http\Controllers\VehiculoPropietarioController@store');//Crear registro vehiculos de Propietario
 Route::put('/vehiculosPropietarios/{id}', 'App\Http\Controllers\VehiculoPropietarioController@update');//Actualizar registro vehiculos y Propietario
 Route::delete('/vehiculosPropietarios/{id}', 'App\Http\Controllers\VehiculoPropietarioController@destroy');//Eliminar un registro vehiculos y Propietario
+
+
+Route::get('/liquidacion/{placa}', 'App\Http\Controllers\liquidacionController@index');//Mostrar liquidacion de Vehiculo

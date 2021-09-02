@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\vehiculoCreateRequest;
+use App\Http\Requests\vehiculoEditeRequest;
 use Illuminate\Http\Request;
 use App\Models\sisof_Vehiculo;
-use Dflydev\DotAccessData\Data;
+
 
 class VehiculoController extends Controller
 {
@@ -35,14 +37,8 @@ class VehiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(vehiculoCreateRequest $request)
     {
-        $validateData = $request->validate([
-            'placa'=>'string|unique|require',
-            'marca'=>'string',
-            'linea'=>'string',
-            'precio'=>'integer',
-        ]);
 
         $vehiculo = new sisof_Vehiculo();
         $vehiculo->placa = $request->placa;
@@ -82,7 +78,7 @@ class VehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(vehiculoEditeRequest $request)
     {
         $vehiculo = sisof_Vehiculo::findOrFail($request->id);
         $vehiculo->placa = $request->placa;

@@ -1,24 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\propietarioCreateRequest;
-use App\Http\Requests\propietarioEditeRequest;
+use App\Models\sisof_Vehiculo;
 use App\Models\sisof_Propietario;
+use App\Models\sisof_VehiculoPropietario;
 
 use Illuminate\Http\Request;
 
-class PropietarioController extends Controller
+class liquidacionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($placa)
     {
-        $propietarios = sisof_Propietario::all();
-        return $propietarios;
+        
+        $vehiculos = sisof_Vehiculo::where('placa', $placa)->first();
+        dd($vehiculos->vehiculoPropietario());
+        
+        $liquidacion=0.0;
+        return $liquidacion;
+        
     }
 
     /**
@@ -37,14 +41,9 @@ class PropietarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(propietarioCreateRequest $request)
+    public function store(Request $request)
     {
-        $propietario = new sisof_Propietario();
-        $propietario->cedula = $request->cedula;
-        $propietario->nombres = $request->nombres;
-        $propietario->apellidos = $request->apellidos;
-
-        $propietario->save();
+        //
     }
 
     /**
@@ -76,15 +75,9 @@ class PropietarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(propietarioEditeRequest $request)
+    public function update(Request $request, $id)
     {
-        $propietario = sisof_Propietario::findOrFail($request->id);
-        $propietario->cedula = $request->cedula;
-        $propietario->nombres = $request->nombres;
-        $propietario->apellidos = $request->apellidos;
-
-        $propietario->save();
-        return $propietario;
+        //
     }
 
     /**
@@ -93,9 +86,8 @@ class PropietarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $propietario = sisof_Propietario::destroy($request->id);
-        return $propietario;
+        //
     }
 }
